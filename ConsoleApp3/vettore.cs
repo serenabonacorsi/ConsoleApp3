@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ConsoleApp3
 {
     internal class vettore
-    {
+    {   
         public double x { get; set; }
         public double y { get; set; }
 
@@ -77,7 +77,37 @@ namespace ConsoleApp3
 
         public override string ToString()
         {
-            return String.Format("vettore : [{0} , {1}]", x, y);
+            return String.Format("{0},{1}", x, y);
+        }
+
+        public static vettore Parse(string s)
+        {
+            double x;
+            double y;
+            string[] v = s.Split(',');
+            x = double.Parse(v[0]);
+            y = double.Parse(v[1]);
+
+            vettore v2 = new vettore(x, y);
+
+            return v2;
+        } 
+
+        public static bool TryParse(string s, out vettore v)
+        {
+            v = new vettore(0,0);
+            string[] splits = s.Split(',');
+            if (splits.Length != 2)
+            {
+                return false;
+            }
+            else
+            {
+                v.x = double.Parse(splits[0]);
+                v.y = double.Parse(splits[1]);
+                return true;
+            }
+
         }
     }
 }
